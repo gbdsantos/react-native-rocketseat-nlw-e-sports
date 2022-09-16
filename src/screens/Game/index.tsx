@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   FlatList,
   Image,
+  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -67,10 +68,15 @@ export function Game() {
         />
 
         <FlatList
-          contentContainerStyle={styles.contentList}
+          contentContainerStyle={[duos.length > 0 ? styles.contentList : styles.emptyListContent]}
           data={duos}
           horizontal
           keyExtractor={item => item.id}
+          ListEmptyComponent={() => (
+            <Text style={styles.emptyList}>
+              Não há anúncios publicados ainda.
+            </Text>
+          )}
           renderItem={({ item }) => (
             <DuoCard
               data={item}
