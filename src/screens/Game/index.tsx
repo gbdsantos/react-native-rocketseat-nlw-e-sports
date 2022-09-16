@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import {
+  FlatList,
   Image,
   TouchableOpacity,
   View
@@ -8,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Background } from '../../components/Background';
+import { DuoCard, DuoCardProps } from '../../components/DuoCard';
 import { Heading } from '../../components/Heading';
 
 import logoImg from '../../assets/logo-nlw-esports.png';
@@ -17,13 +20,21 @@ import { THEME } from '../../theme';
 import { GameParams } from '../../@types/navigation';
 
 export function Game() {
+  const [duos, setDuos] = useState<DuoCardProps[]>([]);
+
   const navigation = useNavigation();
   const route = useRoute();
-  const { bannerUrl, title } = route.params as GameParams;
+  const { bannerUrl, id, title } = route.params as GameParams;
 
   function handleGoBackScreen() {
     navigation.goBack();
   }
+
+  useEffect(() => {
+    fetch(`http://192.168.1.19:3333/games/${id}/ads`)
+      .then(response => response.json())
+      .then(data => setDuos(data));
+  }, []);
 
   return (
     <Background>
@@ -53,6 +64,21 @@ export function Game() {
         <Heading
           subtitle="Conecte-se e comece a jogar!"
           title={title}
+        />
+
+        <FlatList
+          contentContainerStyle={styles.contentList}
+          data={duos}
+          horizontal
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <DuoCard
+              data={item}
+              onConnect={() => { }}
+            />
+          )}
+          showsHorizontalScrollIndicator={false}
+          style={styles.containerList}
         />
       </SafeAreaView>
     </Background>

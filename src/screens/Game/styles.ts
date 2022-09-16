@@ -30,5 +30,15 @@ export const styles = StyleSheet.create({
     marginTop: 32,
     height: 160,
     width: 311
+  },
+
+  containerList: {
+    width: '100%'
+  },
+
+  contentList: {
+    alignItems: 'flex-start',
+    paddingLeft: 32,
+    paddingRight: 64
   }
 });
