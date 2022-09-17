@@ -27,7 +27,6 @@
 <p align="center">
     <a href="#gear-getting-start">Getting Start</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="#racing_car-checkered_flag-extra-mile">Extra mile</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="#layout-">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="#balance_scale-license">License</a>
 </p>
 
@@ -55,7 +54,7 @@ expo start
 <details>
   <summary>TODO/TASKS</summary>
   - [ ] Add notifications - Hint: Expo Notifications
-  - [ ]
+  - [ ] Implement on backend autentication
 </details>
 
 <br>
