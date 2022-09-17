@@ -1,5 +1,6 @@
-import React from 'react';
+import { useState } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   Modal,
   ModalProps,
@@ -22,11 +23,14 @@ interface Props extends ModalProps {
 }
 
 export function DuoMatch({ discord, onClose, ...rest }: Props) {
+  const [isCopping, setIsCopping] = useState(false);
 
   async function handleCopyDiscordUserToClipboard() {
+    setIsCopping(true);
     await Clipboard.setStringAsync(discord);
 
-    Alert.alert("Discord", "Nome de usuário copiado para você colocar no Discord e encontrar essa pessoa!")
+    Alert.alert("Discord", "Nome de usuário copiado pra você colocar no Discord.")
+    setIsCopping(false);
   }
 
   return (
@@ -67,11 +71,12 @@ export function DuoMatch({ discord, onClose, ...rest }: Props) {
           </Text>
 
           <TouchableOpacity
+            disabled={isCopping}
             onPress={handleCopyDiscordUserToClipboard}
             style={styles.discordButton}
           >
             <Text style={styles.discord}>
-              {discord}
+              {isCopping ? <ActivityIndicator color={THEME.COLORS.PRIMARY} /> : discord}
             </Text>
           </TouchableOpacity>
         </View>
